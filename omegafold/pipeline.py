@@ -141,6 +141,8 @@ def fasta2inputs(
         folder_name = path_leaf(fasta_path).split(".")[0]
         output_dir = os.path.join(parent, folder_name)
         os.makedirs(output_dir, exist_ok=True)
+    elif os.path.exists(output_dir) is False:
+        os.makedirs(output_dir, exist_ok=True)
     try:
         name_max = os.pathconf(output_dir, 'PC_NAME_MAX') - 4
     except AttributeError:
