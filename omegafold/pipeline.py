@@ -115,6 +115,7 @@ def fasta2inputs(
     Returns:
 
     """
+    output_dir = output_dir.replace('.fasta', '')
     chain_ids: list[str] = []
     aastr: list[str] = []
     with open(fasta_path, 'r') as file:
@@ -159,9 +160,15 @@ def fasta2inputs(
             out_fname = ch.replace(os.path.sep, "-")
         else:
             out_fname = f"{i}th chain"
+            
+        out_fname = out_fname.replace(' | ', '_')
+        out_fname = out_fname.replace(';', '_')
+        out_fname = out_fname.replace(' ', '')
+        
         out_fname = os.path.join(output_dir, out_fname + ".pdb")
 
         num_res = len(aatype)
+        
         data = list()
         g = None
         if deterministic:
