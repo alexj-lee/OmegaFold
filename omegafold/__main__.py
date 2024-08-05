@@ -65,7 +65,12 @@ def main():
                 num_cycle=args.num_cycle,
             )
     ):
+            
         logging.info(f"Predicting {i + 1}th chain in {args.input_file}")
+        if os.path.exists(save_path):
+            logging.info("Path exists: skipping.")
+            continue
+
         logging.info(
             f"{len(input_data[0]['p_msa'][0])} residues in this chain."
         )
